@@ -70,6 +70,8 @@ import org.apache.calcite.sql.fun.SqlStdOperatorTable;
 import org.apache.calcite.sql.fun.SqlSubstringFunction;
 import org.apache.calcite.sql.fun.SqlTrimFunction;
 import org.apache.calcite.sql.parser.SqlParserPos;
+import org.apache.calcite.sql.type.ArraySqlType;
+import org.apache.calcite.sql.type.ObjectSqlType;
 import org.apache.calcite.sql.type.SqlOperandTypeChecker;
 import org.apache.calcite.sql.type.SqlTypeFamily;
 import org.apache.calcite.sql.type.SqlTypeName;
@@ -596,10 +598,14 @@ public class StandardConvertletTable extends ReflectiveConvertletTable {
       return cx.convertExpression(left);
     }
     if (null != dataType.getCollectionsTypeName()) {
-      final RelDataType argComponentType =
-          requireNonNull(
-              arg.getType().getComponentType(),
-              () -> "componentType of " + arg);
+      final RelDataType argComponentType;
+      if (arg.getType().getComponentType() == null && arg.getKind() == SqlKind.ITEM) {
+        argComponentType = typeFactory.createSqlType(SqlTypeName.ANY);
+      } else {
+        argComponentType =
+            requireNonNull(arg.getType().getComponentType(),
+                () -> "componentType of " + arg);
+      }
 
       RelDataType typeFinal = type;
       final RelDataType componentType = requireNonNull(

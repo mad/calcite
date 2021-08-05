@@ -124,6 +124,9 @@ public abstract class Linq4j {
    * @return enumerable
    */
   public static <T> Enumerable<T> asEnumerable(final List<T> list) {
+    if (list == null) {
+      return Linq4j.emptyEnumerable();
+    }
     return new ListEnumerable<>(list);
   }
 

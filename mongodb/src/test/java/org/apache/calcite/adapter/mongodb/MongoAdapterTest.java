@@ -377,6 +377,21 @@ public class MongoAdapterTest implements SchemaFactory {
         .returnsCount(ZIPS_SIZE);
   }
 
+  @Test void testFunc() {
+    assertModel(MODEL)
+        .query(
+            "select * from UNNEST(" +
+                "select CAST(t.v['output'] AS ANY ARRAY) from UNNEST(select CAST(_MAP['result.result'] AS ANY ARRAY) from \"mongo_raw\".\"zips\" limit 2) t(v)"
+               + ")"
+        )
+        // .query("select _MAP['result'] from \"mongo_raw\".\"zips\" limit 1")
+        // .returnsCount(ZIPS_SIZE)
+        // .explainContains("qweqwe")
+        // .returns("")
+        // .returns("")
+    ;
+  }
+
   @Test void testCountGroupByEmpty() {
     assertModel(MODEL)
         .query("select count(*) from zips")

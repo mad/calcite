@@ -32,6 +32,7 @@ import org.apache.calcite.rel.logical.LogicalFilter;
 import org.apache.calcite.rel.logical.LogicalProject;
 import org.apache.calcite.rel.type.RelDataType;
 import org.apache.calcite.rex.RexCall;
+import org.apache.calcite.rex.RexFieldAccess;
 import org.apache.calcite.rex.RexInputRef;
 import org.apache.calcite.rex.RexLiteral;
 import org.apache.calcite.rex.RexNode;
@@ -224,8 +225,7 @@ public class MongoRules {
         sb.append(finish);
         return sb.toString();
       }
-      throw new IllegalArgumentException("Translation of " + call.toString()
-          + " is not supported by MongoProject");
+      return super.visitCall(call);
     }
 
     private static String stripQuotes(String s) {

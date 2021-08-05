@@ -1,4 +1,4 @@
-{ "_id" : "01701", "city" : "FRAMINGHAM", "loc" : [ -71.42548600000001, 42.300665 ], "pop" : 65046, "state" : "MA" }
+{ "_id" : "01701", "city" : "FRAMINGHAM", "loc" : [ -71.42548600000001, 42.300665 ], "pop" : 65046, "state" : "MA", "result": { "result": [ { "output" : [ {"a": "1"}, {"a": "2"} ] } ] } }
 { "_id" : "02154", "city" : "NORTH WALTHAM", "loc" : [ -71.236497, 42.382492 ], "pop" : 57871, "state" : "MA" }
 { "_id" : "02401", "city" : "BROCKTON", "loc" : [ -71.03434799999999, 42.081571 ], "pop" : 59498, "state" : "MA" }
 { "_id" : "02840", "city" : "MIDDLETOWN", "loc" : [ -71.30347999999999, 41.504502 ], "pop" : 47687, "state" : "RI" }
